@@ -1,5 +1,5 @@
 {
-    "name": "chinac/cos-sdk-php",
+    "name": "chinac/cos-php-sdk",
     "description": "Chinac COS SDK for PHP",
     "homepage": "https://www.chinac.com/Product/newCos.html",
     "type": "library",
