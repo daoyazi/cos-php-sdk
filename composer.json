@@ -1,0 +1,29 @@
+{
+    "name": "chinac/cos-sdk-php",
+    "description": "Chinac COS SDK for PHP",
+    "homepage": "https://www.chinac.com/Product/newCos.html",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chinac",
+            "homepage": "http://www.chinac.com"
+        }
+    ],
+
+    "require": {
+    	"php":">=5.3"
+    },
+
+    "require-dev" : {
+   	    "phpunit/phpunit": "~4.0",
+        "squizlabs/php_codesniffer": "~2.3",
+	      "phpdocumentor/phpdocumentor" : "2.*"
+    },
+
+    "minimum-stability": "stable",
+
+    "autoload": {
+        "psr-4": {"COS\\": "src/COS"}
+    }
+}
