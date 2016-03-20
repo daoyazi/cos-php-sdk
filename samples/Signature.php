@@ -14,6 +14,7 @@ getSignedUrlForPuttingObject($cosClient, $bucket);
 getSignedUrlForPuttingObjectFromFile($cosClient, $bucket);
 getSignedUrlForGettingObject($cosClient, $bucket);
 
+
 /**
  * 生成GetObject的签名url,主要用于私有权限下的读访问控制
  *
@@ -30,7 +31,7 @@ function getSignedUrlForGettingObject($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": signedUrl: " . $signedUrl . "\n");
     /**
@@ -45,6 +46,7 @@ function getSignedUrlForGettingObject($cosClient, $bucket)
         print(__FUNCTION__ . ": OK" . "\n");
     } else {
         print(__FUNCTION__ . ": FAILED" . "\n");
+        assert(0);
     };
 }
 
@@ -66,7 +68,7 @@ function getSignedUrlForPuttingObject($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": signedUrl: " . $signedUrl . "\n");
     $content = file_get_contents(__FILE__);
@@ -83,6 +85,7 @@ function getSignedUrlForPuttingObject($cosClient, $bucket)
         print(__FUNCTION__ . ": OK" . "\n");
     } else {
         print(__FUNCTION__ . ": FAILED" . "\n");
+        assert(0);
     };
 }
 
@@ -105,7 +108,7 @@ function getSignedUrlForPuttingObjectFromFile($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": signedUrl: " . $signedUrl . "\n");
 
@@ -121,5 +124,6 @@ function getSignedUrlForPuttingObjectFromFile($cosClient, $bucket)
         print(__FUNCTION__ . ": OK" . "\n");
     } else {
         print(__FUNCTION__ . ": FAILED" . "\n");
+        assert(0);
     };
 }

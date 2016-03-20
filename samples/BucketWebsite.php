@@ -46,7 +46,7 @@ function putBucketWebsite($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -66,7 +66,7 @@ function getBucketWebsite($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
     print($websiteConfig->serializeToJson() . "\n");
@@ -86,7 +86,7 @@ function deleteBucketWebsite($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }

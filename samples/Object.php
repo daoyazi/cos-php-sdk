@@ -9,7 +9,6 @@ $cosClient = Common::getCosClient();
 if (is_null($cosClient)) exit(1);
 
 createObjectDir($cosClient, $bucket);
-listAllObjects($cosClient, $bucket);
 listObjects($cosClient, $bucket);
 putObject($cosClient, $bucket);
 uploadFile($cosClient, $bucket);
@@ -20,6 +19,7 @@ getObjectMeta($cosClient, $bucket);
 deleteObject($cosClient, $bucket);
 deleteObjects($cosClient, $bucket);
 doesObjectExist($cosClient, $bucket);
+listAllObjects($cosClient, $bucket);
 
 /**
  * 创建虚拟目录
@@ -35,7 +35,7 @@ function createObjectDir($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -59,7 +59,7 @@ function putObject($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -83,7 +83,7 @@ function uploadFile($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -113,7 +113,7 @@ function listObjects($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     $objectList = $listObjectInfo->getObjectList(); // 文件列表
     $prefixList = $listObjectInfo->getPrefixList(); // 目录列表
@@ -146,9 +146,9 @@ function listAllObjects($cosClient, $bucket)
         $cosClient->putObject($bucket, "dir/obj" . strval($i), "hi");
         $cosClient->createObjectDir($bucket, "dir/obj" . strval($i));
     }
-    printf("directories and objects reated done\n");
+    printf("directories and objects created done\n");
 
-    $prefix = 'dir/';
+    $prefix = '';
     $delimiter = '';
     $nextMarker = '';
     $maxkeys = 4;
@@ -167,20 +167,20 @@ function listAllObjects($cosClient, $bucket)
         } catch (CosException $e) {
             printf(__FUNCTION__ . ": FAILED\n");
             printf($e->getMessage() . "\n");
-            return;
+            assert(0);
         }
         // 得到nextMarker，从上一次listObjects读到的最后一个文件的下一个文件开始继续获取文件列表
         $nextMarker = $listObjectInfo->getNextMarker();
         $listObject = $listObjectInfo->getObjectList();
         $listPrefix = $listObjectInfo->getPrefixList();
-        var_dump(count($listObject));
-        var_dump(count($listPrefix));
+        //var_dump(count($listObject));
+        //var_dump(count($listPrefix));
 
-        // if (!empty($listObject)) {
-        //     foreach ($listObject as $objectInfo) {
-        //       print($objectInfo->getKey() . "\n");
-        //     }
-        // }
+        if (!empty($listObject)) {
+            foreach ($listObject as $objectInfo) {
+              $cosClient->deleteObject($bucket, $objectInfo->getKey());
+            }
+        }
 
         // if (!empty($listPrefix)) {
         //     foreach ($listPrefix as $prefixInfo) {
@@ -195,6 +195,7 @@ function listAllObjects($cosClient, $bucket)
         }
     }
     printf(__FUNCTION__ . ": OK, and there are <" . $cnt . "> objects started with dir\n");
+    $cosClient->deleteBucket($bucket);
 }
 
 /**
@@ -213,13 +214,14 @@ function getObject($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
     if (file_get_contents(__FILE__) === $content) {
         print(__FUNCTION__ . ": FileContent checked OK" . "\n");
     } else {
         print(__FUNCTION__ . ": FileContent checked FAILED" . "\n");
+        assert(0);
     }
 }
 
@@ -246,13 +248,14 @@ function getObjectToLocalFile($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK, please check localfile: 'upload-test-object-name.txt'" . "\n");
     if (file_get_contents($localfile) === file_get_contents(__FILE__)) {
         print(__FUNCTION__ . ": FileContent checked OK" . "\n");
     } else {
         print(__FUNCTION__ . ": FileContent checked FAILED" . "\n");
+        assert(0);
     }
     if (file_exists($localfile)) {
         unlink($localfile);
@@ -284,7 +287,7 @@ function modifyMetaForObject($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -304,19 +307,9 @@ function getObjectMeta($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
-
-    //COS dose not support Content-Disposition for now
-/*    if (isset($objectMeta[strtolower('Content-Disposition')]) &&
-        'attachment; filename="xxxxxx"' === $objectMeta[strtolower('Content-Disposition')]
-    ) {
-        print(__FUNCTION__ . ": ObjectMeta checked OK" . "\n");
-    } else {
-        print(__FUNCTION__ . ": ObjectMeta checked FAILED" . "\n");
-    }
-*/
 }
 
 /**
@@ -334,7 +327,7 @@ function deleteObject($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -357,7 +350,7 @@ function deleteObjects($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -377,7 +370,7 @@ function doesObjectExist($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }

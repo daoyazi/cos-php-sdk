@@ -54,7 +54,7 @@ function multiuploadFile($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ":  OK" . "\n");
 }
@@ -77,7 +77,7 @@ function putObjectByRawApis($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": initiateMultipartUpload FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": initiateMultipartUpload OK" . "\n");
     /*
@@ -110,7 +110,7 @@ function putObjectByRawApis($cosClient, $bucket)
         } catch (CosException $e) {
             printf(__FUNCTION__ . ": initiateMultipartUpload, uploadPart - part#{$i} FAILED\n");
             printf($e->getMessage() . "\n");
-            return;
+            assert(0);
         }
         printf(__FUNCTION__ . ": initiateMultipartUpload, uploadPart - part#{$i} OK\n");
     }
@@ -129,7 +129,7 @@ function putObjectByRawApis($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": completeMultipartUpload FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     printf(__FUNCTION__ . ": completeMultipartUpload OK\n");
 }
@@ -150,7 +150,7 @@ function uploadDir($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     printf(__FUNCTION__ . ": completeMultipartUpload OK\n");
 }
@@ -174,7 +174,7 @@ function listMultipartUploads($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": listMultipartUploads FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     printf(__FUNCTION__ . ": listMultipartUploads OK\n");
     $listUploadInfo = $listMultipartUploadInfo->getUploads();

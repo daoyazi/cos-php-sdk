@@ -12,6 +12,17 @@ use COS\CosClient;
 use COS\Core\CosException;
 
 /**
+ * 断言回调函数，抛出异常
+ */
+function assert_callcack() {
+    throw new Exception("assert error");
+}
+
+// Set our assert options
+assert_options(ASSERT_WARNING,  true);
+assert_options(ASSERT_CALLBACK, 'assert_callcack');
+
+/**
  * Class Common
  *
  * 示例程序【Samples/*.php】 的Common类，用于获取CosClient实例和其他公用方法
@@ -35,7 +46,7 @@ class Common
         } catch (CosException $e) {
             printf(__FUNCTION__ . "creating CosClient instance: FAILED\n");
             printf($e->getMessage() . "\n");
-            return null;
+            assert(0);
         }
         return $cosClient;
     }
@@ -67,7 +78,7 @@ class Common
             }
             printf(__FUNCTION__ . ": FAILED\n");
             printf($e->getMessage() . "\n");
-            return;
+            assert(0);
         }
         print(__FUNCTION__ . ": OK" . "\n");
     }

@@ -8,8 +8,8 @@
  */
 final class Config
 {
-    const COS_ACCESS_ID = '';
-    const COS_ACCESS_KEY = '';
-    const COS_ENDPOINT = '';
-    const COS_TEST_BUCKET = '';
+    const COS_ACCESS_ID = 'dcbf4036e50a4135aeab604f729a8115';
+    const COS_ACCESS_KEY = 'b36e5f786b794e7ca4d5026c896976c9';
+    const COS_ENDPOINT = 'cos-beta.chinac.com';
+    const COS_TEST_BUCKET = 'cos-php-sdk-funtion-test';
 }

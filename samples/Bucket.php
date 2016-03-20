@@ -13,7 +13,7 @@ doesBucketExist($cosClient, $bucket);
 putBucketAcl($cosClient, $bucket);
 getBucketAcl($cosClient, $bucket);
 listBuckets($cosClient);
-//不删除该Bucket, 后面的单元测试可以基于该bucket进行
+//不删除该Bucket, 后面的测试可以基于该bucket进行
 //deleteBucket($cosClient, $bucket);
 
 /**
@@ -33,7 +33,7 @@ function createBucket($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED.    ");
         printf($e->getErrorMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -51,12 +51,13 @@ function doesBucketExist($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     if ($res === true) {
         print(__FUNCTION__ . ": OK" . "\n");
     } else {
         print(__FUNCTION__ . ": FAILED" . "\n");
+        assert(0);
     }
 }
 
@@ -74,7 +75,7 @@ function deleteBucket($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -94,7 +95,7 @@ function putBucketAcl($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -114,7 +115,7 @@ function getBucketAcl($cosClient, $bucket)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
 }
@@ -134,7 +135,7 @@ function listBuckets($cosClient)
     } catch (CosException $e) {
         printf(__FUNCTION__ . ": FAILED\n");
         printf($e->getMessage() . "\n");
-        return;
+        assert(0);
     }
     print(__FUNCTION__ . ": OK" . "\n");
     $bucketList = $bucketListInfo->getBucketList();

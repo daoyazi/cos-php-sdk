@@ -20,7 +20,7 @@ class UploadPartResult extends Result
     {
         $header = $this->rawResponse->header;
         if (isset($header["etag"])) {
-            return $header["etag"];
+            return trim($header["etag"],"\"");
         }
         throw new CosException("cannot get ETag");
 
