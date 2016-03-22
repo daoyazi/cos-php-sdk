@@ -29,11 +29,6 @@ assert_options(ASSERT_CALLBACK, 'assert_callcack');
  */
 class Common
 {
-    const endpoint = Config::COS_ENDPOINT;
-    const accessKeyId = Config::COS_ACCESS_ID;
-    const accessKeySecret = Config::COS_ACCESS_KEY;
-    const bucket = Config::COS_TEST_BUCKET;
-
     /**
      * 根据Config配置，得到一个CosClient实例
      *
@@ -41,8 +36,10 @@ class Common
      */
     public static function getCosClient()
     {
+        $config = new Config();
+
         try {
-            $cosClient = new CosClient(self::accessKeyId, self::accessKeySecret, self::endpoint);
+            $cosClient = new CosClient($config->COS_ACCESS_ID, $config->COS_ACCESS_KEY, $config->COS_ENDPOINT);
         } catch (CosException $e) {
             printf(__FUNCTION__ . "creating CosClient instance: FAILED\n");
             printf($e->getMessage() . "\n");
@@ -53,7 +50,8 @@ class Common
 
     public static function getBucketName()
     {
-        return self::bucket;
+        $config = new Config();
+        return $config->COS_TEST_BUCKET;
     }
 
     /**

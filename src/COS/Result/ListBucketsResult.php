@@ -24,7 +24,8 @@ class ListBucketsResult extends Result
             foreach($response->Buckets as $bucket) {
                 $bucketInfo = new BucketInfo(strval($bucket->Location),
                     strval($bucket->Name),
-                    strval($bucket->CreationDate));
+                    strval($bucket->CreationDate),
+                    strval($bucket->ACL));
                 $bucketList[] = $bucketInfo;
             }
         }

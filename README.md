@@ -112,9 +112,9 @@ foreach($bucketList as $bucket) {
 
     
 ### 运行Sample程序
-	
-1. 修改 `samples/Config.php`， 补充配置信息
-2. 执行 `cd samples/ && php RunAll.php`
+1. 设置环境变量：COS_ACCESS_KEY_ID, COS_ACCESS_KEY_SECRET, COS_ENDPOINT, COS_TEST_BUCKET	
+2. 修改 `samples/Config.php`， 补充配置信息
+3. 执行 `cd samples/ && php RunAll.php`
 
 ### 运行单元测试
 

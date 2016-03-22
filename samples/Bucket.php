@@ -140,6 +140,6 @@ function listBuckets($cosClient)
     print(__FUNCTION__ . ": OK" . "\n");
     $bucketList = $bucketListInfo->getBucketList();
     foreach ($bucketList as $bucket) {
-        print($bucket->getLocation() . "\t" . $bucket->getName() . "\t" . $bucket->getCreatedate() . "\n");
+        print($bucket->getLocation() . "  " . $bucket->getName() . "  " . $bucket->getCreatedate() . "  " . $bucket->getACL() . "\n");
     }
 }

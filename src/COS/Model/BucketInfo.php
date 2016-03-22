@@ -18,11 +18,12 @@ class BucketInfo
      * @param string $name
      * @param string $createDate
      */
-    public function __construct($location, $name, $createDate)
+    public function __construct($location, $name, $createDate, $acl)
     {
         $this->location = $location;
         $this->name = $name;
         $this->createDate = $createDate;
+        $this->acl = $acl;
     }
 
     /**
@@ -56,6 +57,16 @@ class BucketInfo
     }
 
     /**
+     * 得到bucket的ACL
+     *
+     * @return string
+     */
+    public function getACL()
+    {
+        return $this->acl;
+    }
+
+    /**
      * bucket所在的region
      *
      * @var string
@@ -75,4 +86,10 @@ class BucketInfo
      */
     private $createDate;
 
+    /**
+     * bucket的访问权限
+     *
+     * @var string
+     */
+    private $acl;
 }
