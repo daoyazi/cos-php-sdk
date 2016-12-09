@@ -1721,7 +1721,7 @@ class CosClient
     );
     // CosClient版本信息
     const COS_NAME = "cos-sdk-php";
-    const COS_VERSION = "2.0.5";
+    const COS_VERSION = "0.1.0";
     const COS_BUILD = "20160126";
     const COS_AUTHOR = "";
     const COS_OPTIONS_ORIGIN = 'Origin';
